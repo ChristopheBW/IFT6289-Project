@@ -1,0 +1,1549 @@
+QuestionIndex,AnswerIndex,AnswerText
+Q1,1,Very important
+Q1,2,Rather important
+Q1,3,Not very important
+Q1,4,Not at all important
+Q1,-1,Don't know
+Q1,-2,No answer
+Q1,-3,Not applicable
+Q1,-5,Missing
+Q2,1,Very important
+Q2,2,Rather important
+Q2,3,Not very important
+Q2,4,Not at all important
+Q2,-1,Don't know
+Q2,-2,No answer
+Q2,-3,Not applicable
+Q2,-5,Missing
+Q3,1,Very important
+Q3,2,Rather important
+Q3,3,Not very important
+Q3,4,Not at all important
+Q3,-1,Don't know
+Q3,-2,No answer
+Q3,-3,Not applicable
+Q3,-5,Missing
+Q4,1,Very important
+Q4,2,Rather important
+Q4,3,Not very important
+Q4,4,Not at all important
+Q4,-1,Don't know
+Q4,-2,No answer
+Q4,-3,Not applicable
+Q4,-5,Missing
+Q5,1,Very important
+Q5,2,Rather important
+Q5,3,Not very important
+Q5,4,Not at all important
+Q5,-1,Don't know
+Q5,-2,No answer
+Q5,-3,Not applicable
+Q5,-5,Missing
+Q6,1,Very important
+Q6,2,Rather important
+Q6,3,Not very important
+Q6,4,Not at all important
+Q6,-1,Don't know
+Q6,-2,No answer
+Q6,-3,Not applicable
+Q6,-5,Missing
+Q7,1,Mentioned
+Q7,2,Not mentioned
+Q7,-1,Don't know
+Q7,-2,No answer
+Q7,-3,Not applicable
+Q7,-5,Missing
+Q8,1,Mentioned
+Q8,2,Not mentioned
+Q8,-1,Don't know
+Q8,-2,No answer
+Q8,-3,Not applicable
+Q8,-5,Missing
+Q9,1,Mentioned
+Q9,2,Not mentioned
+Q9,-1,Don't know
+Q9,-2,No answer
+Q9,-3,Not applicable
+Q9,-5,Missing
+Q10,1,Mentioned
+Q10,2,Not mentioned
+Q10,-1,Don't know
+Q10,-2,No answer
+Q10,-3,Not applicable
+Q10,-5,Missing
+Q11,1,Mentioned
+Q11,2,Not mentioned
+Q11,-1,Don't know
+Q11,-2,No answer
+Q11,-3,Not applicable
+Q11,-5,Missing
+Q12,1,Mentioned
+Q12,2,Not mentioned
+Q12,-1,Don't know
+Q12,-2,No answer
+Q12,-3,Not applicable
+Q12,-5,Missing
+Q13,1,Mentioned
+Q13,2,Not mentioned
+Q13,-1,Don't know
+Q13,-2,No answer
+Q13,-3,Not applicable
+Q13,-5,Missing
+Q14,1,Mentioned
+Q14,2,Not mentioned
+Q14,-1,Don't know
+Q14,-2,No answer
+Q14,-3,Not applicable
+Q14,-5,Missing
+Q15,1,Mentioned
+Q15,2,Not mentioned
+Q15,-1,Don't know
+Q15,-2,No answer
+Q15,-3,Not applicable
+Q15,-5,Missing
+Q16,1,Mentioned
+Q16,2,Not mentioned
+Q16,-1,Don't know
+Q16,-2,No answer
+Q16,-3,Not applicable
+Q16,-5,Missing
+Q17,1,Mentioned
+Q17,2,Not mentioned
+Q17,-1,Don't know
+Q17,-2,No answer
+Q17,-3,Not applicable
+Q17,-5,Missing
+Q18,1,Mentioned
+Q18,2,Not mentioned
+Q18,-1,Don't know
+Q18,-2,No answer
+Q18,-3,Not applicable
+Q18,-5,Missing
+Q19,1,Mentioned
+Q19,2,Not mentioned
+Q19,-1,Don't know
+Q19,-2,No answer
+Q19,-3,Not applicable
+Q19,-5,Missing
+Q20,1,Mentioned
+Q20,2,Not mentioned
+Q20,-1,Don't know
+Q20,-2,No answer
+Q20,-3,Not applicable
+Q20,-5,Missing
+Q21,1,Mentioned
+Q21,2,Not mentioned
+Q21,-1,Don't know
+Q21,-2,No answer
+Q21,-3,Not applicable
+Q21,-5,Missing
+Q22,1,Mentioned
+Q22,2,Not mentioned
+Q22,-1,Don't know
+Q22,-2,No answer
+Q22,-3,Not applicable
+Q22,-5,Missing
+Q23,1,Mentioned
+Q23,2,Not mentioned
+Q23,-1,Don't know
+Q23,-2,No answer
+Q23,-3,Not applicable
+Q23,-5,Missing
+Q24,1,Mentioned
+Q24,2,Not mentioned
+Q24,-1,Don't know
+Q24,-2,No answer
+Q24,-3,Not applicable
+Q24,-5,Missing
+Q25,1,Mentioned
+Q25,2,Not mentioned
+Q25,-1,Don't know
+Q25,-2,No answer
+Q25,-3,Not applicable
+Q25,-5,Missing
+Q26,1,Mentioned
+Q26,2,Not mentioned
+Q26,-1,Don't know
+Q26,-2,No answer
+Q26,-3,Not applicable
+Q26,-5,Missing
+Q27,1,Strongly agree
+Q27,2,Agree
+Q27,3,Disagree
+Q27,4,Strongly disagree
+Q27,-1,Don't know
+Q27,-2,No answer
+Q27,-3,Not applicable
+Q27,-5,Missing
+Q28,1,Strongly agree
+Q28,2,Agree
+Q28,3,Disagree
+Q28,4,Strongly disagree
+Q28,-1,Don't know
+Q28,-2,No answer
+Q28,-3,Not applicable
+Q28,-5,Missing
+Q29,1,Strongly agree
+Q29,2,Agree
+Q29,3,Disagree
+Q29,4,Strongly disagree
+Q29,-1,Don't know
+Q29,-2,No answer
+Q29,-3,Not applicable
+Q29,-5,Missing
+Q30,1,Strongly agree
+Q30,2,Agree
+Q30,3,Disagree
+Q30,4,Strongly disagree
+Q30,-1,Don't know
+Q30,-2,No answer
+Q30,-3,Not applicable
+Q30,-5,Missing
+Q31,1,Strongly agree
+Q31,2,Agree
+Q31,3,Disagree
+Q31,4,Strongly disagree
+Q31,-1,Don't know
+Q31,-2,No answer
+Q31,-3,Not applicable
+Q31,-5,Missing
+Q32,1,Strongly agree
+Q32,2,Agree
+Q32,3,Disagree
+Q32,4,Strongly disagree
+Q32,-1,Don't know
+Q32,-2,No answer
+Q32,-3,Not applicable
+Q32,-5,Missing
+Q33,1,Agree strongly
+Q33,2,Agree
+Q33,3,Neither agree nor disagree
+Q33,4,Disagree
+Q33,5,Disagree strongly
+Q33,-1,Don't know
+Q33,-2,No answer
+Q33,-3,Not applicable
+Q33,-5,Missing
+Q34,1,Agree strongly
+Q34,2,Agree
+Q34,3,Neither agree nor disagree
+Q34,4,Disagree
+Q34,5,Disagree strongly
+Q34,-1,Don't know
+Q34,-2,No answer
+Q34,-3,Not applicable
+Q34,-5,Missing
+Q35,1,Agree strongly
+Q35,2,Agree
+Q35,3,Neither agree nor disagree
+Q35,4,Disagree
+Q35,5,Disagree strongly
+Q35,-1,Don't know
+Q35,-2,No answer
+Q35,-3,Not applicable
+Q35,-5,Missing
+Q36,1,Agree strongly
+Q36,2,Agree
+Q36,3,Neither agree nor disagree
+Q36,4,Disagree
+Q36,5,Disagree strongly
+Q36,-1,Don't know
+Q36,-2,No answer
+Q36,-3,Not applicable
+Q36,-5,Missing
+Q37,1,Agree strongly
+Q37,2,Agree
+Q37,3,Neither agree nor disagree
+Q37,4,Disagree
+Q37,5,Disagree strongly
+Q37,-1,Don't know
+Q37,-2,No answer
+Q37,-3,Not applicable
+Q37,-5,Missing
+Q38,1,Agree strongly
+Q38,2,Agree
+Q38,3,Neither agree nor disagree
+Q38,4,Disagree
+Q38,5,Disagree strongly
+Q38,-1,Don't know
+Q38,-2,No answer
+Q38,-3,Not applicable
+Q38,-5,Missing
+Q39,1,Agree strongly
+Q39,2,Agree
+Q39,3,Neither agree nor disagree
+Q39,4,Disagree
+Q39,5,Disagree strongly
+Q39,-1,Don't know
+Q39,-2,No answer
+Q39,-3,Not applicable
+Q39,-5,Missing
+Q40,1,Agree strongly
+Q40,2,Agree
+Q40,3,Neither agree nor disagree
+Q40,4,Disagree
+Q40,5,Disagree strongly
+Q40,-1,Don't know
+Q40,-2,No answer
+Q40,-3,Not applicable
+Q40,-5,Missing
+Q41,1,Agree strongly
+Q41,2,Agree
+Q41,3,Neither agree nor disagree
+Q41,4,Disagree
+Q41,5,Disagree strongly
+Q41,-1,Don't know
+Q41,-2,No answer
+Q41,-3,Not applicable
+Q41,-5,Missing
+Q42,1,Good
+Q42,2,Don't mind
+Q42,3,Bad
+Q42,-1,Don't know
+Q42,-2,No answer
+Q42,-3,Not applicable
+Q42,-5,Missing
+Q43,1,Good
+Q43,2,Don't mind
+Q43,3,Bad
+Q43,-1,Don't know
+Q43,-2,No answer
+Q43,-3,Not applicable
+Q43,-5,Missing
+Q44,1,Good
+Q44,2,Don't mind
+Q44,3,Bad
+Q44,-1,Don't know
+Q44,-2,No answer
+Q44,-3,Not applicable
+Q44,-5,Missing
+Q45,1,Good
+Q45,2,Don't mind
+Q45,3,Bad
+Q45,-1,Don't know
+Q45,-2,No answer
+Q45,-3,Not applicable
+Q45,-5,Missing
+Q46,1,Very happy
+Q46,2,Fairly happy
+Q46,3,Not very happy
+Q46,4,Not at all happy
+Q46,-1,Don't know
+Q46,-2,No answer
+Q46,-3,Not applicable
+Q46,-5,Missing
+Q47,1,Very good
+Q47,2,Good
+Q47,3,Fair
+Q47,4,Poor
+Q47,5,Very poor
+Q47,-1,Don't know
+Q47,-2,No answer
+Q47,-3,Not applicable
+Q47,-5,Missing
+Q51,1,Often
+Q51,2,Sometimes
+Q51,3,Rarely
+Q51,4,Never
+Q51,-1,Don't know
+Q51,-2,No answer
+Q51,-3,Not applicable
+Q51,-5,Missing
+Q52,1,Often
+Q52,2,Sometimes
+Q52,3,Rarely
+Q52,4,Never
+Q52,-1,Don't know
+Q52,-2,No answer
+Q52,-3,Not applicable
+Q52,-5,Missing
+Q53,1,Often
+Q53,2,Sometimes
+Q53,3,Rarely
+Q53,4,Never
+Q53,-1,Don't know
+Q53,-2,No answer
+Q53,-3,Not applicable
+Q53,-5,Missing
+Q54,1,Often
+Q54,2,Sometimes
+Q54,3,Rarely
+Q54,4,Never
+Q54,-1,Don't know
+Q54,-2,No answer
+Q54,-3,Not applicable
+Q54,-5,Missing
+Q55,1,Often
+Q55,2,Sometimes
+Q55,3,Rarely
+Q55,4,Never
+Q55,-1,Don't know
+Q55,-2,No answer
+Q55,-3,Not applicable
+Q55,-5,Missing
+Q56,1,Better off
+Q56,2,Worse off
+Q56,3,About the same
+Q56,-1,Don't know
+Q56,-2,No answer
+Q56,-3,Not applicable
+Q56,-5,Missing
+Q57,1,Most people can be trusted
+Q57,2,Need to be very careful
+Q57,-1,Don't know
+Q57,-2,No answer
+Q57,-3,Not applicable
+Q57,-5,Missing
+Q58,1,Trust completely
+Q58,2,Trust somewhat
+Q58,3,Do not trust very much
+Q58,4,Do not trust at all
+Q58,-1,Don't know
+Q58,-2,No answer
+Q58,-3,Not applicable
+Q58,-5,Missing
+Q59,1,Trust completely
+Q59,2,Trust somewhat
+Q59,3,Do not trust very much
+Q59,4,Do not trust at all
+Q59,-1,Don't know
+Q59,-2,No answer
+Q59,-3,Not applicable
+Q59,-5,Missing
+Q60,1,Trust completely
+Q60,2,Trust somewhat
+Q60,3,Do not trust very much
+Q60,4,Do not trust at all
+Q60,-1,Don't know
+Q60,-2,No answer
+Q60,-3,Not applicable
+Q60,-5,Missing
+Q61,1,Trust completely
+Q61,2,Trust somewhat
+Q61,3,Do not trust very much
+Q61,4,Do not trust at all
+Q61,-1,Don't know
+Q61,-2,No answer
+Q61,-3,Not applicable
+Q61,-5,Missing
+Q62,1,Trust completely
+Q62,2,Trust somewhat
+Q62,3,Do not trust very much
+Q62,4,Do not trust at all
+Q62,-1,Don't know
+Q62,-2,No answer
+Q62,-3,Not applicable
+Q62,-5,Missing
+Q63,1,Trust completely
+Q63,2,Trust somewhat
+Q63,3,Do not trust very much
+Q63,4,Do not trust at all
+Q63,-1,Don't know
+Q63,-2,No answer
+Q63,-3,Not applicable
+Q63,-5,Missing
+Q64,1,A great deal
+Q64,2,Quite a lot
+Q64,3,Not very much
+Q64,4,None at all
+Q64,-1,Don't know
+Q64,-2,No answer
+Q64,-3,Not applicable
+Q64,-5,Missing
+Q65,1,A great deal
+Q65,2,Quite a lot
+Q65,3,Not very much
+Q65,4,None at all
+Q65,-1,Don't know
+Q65,-2,No answer
+Q65,-3,Not applicable
+Q65,-5,Missing
+Q66,1,A great deal
+Q66,2,Quite a lot
+Q66,3,Not very much
+Q66,4,None at all
+Q66,-1,Don't know
+Q66,-2,No answer
+Q66,-3,Not applicable
+Q66,-5,Missing
+Q67,1,A great deal
+Q67,2,Quite a lot
+Q67,3,Not very much
+Q67,4,None at all
+Q67,-1,Don't know
+Q67,-2,No answer
+Q67,-3,Not applicable
+Q67,-5,Missing
+Q68,1,A great deal
+Q68,2,Quite a lot
+Q68,3,Not very much
+Q68,4,None at all
+Q68,-1,Don't know
+Q68,-2,No answer
+Q68,-3,Not applicable
+Q68,-5,Missing
+Q69,1,A great deal
+Q69,2,Quite a lot
+Q69,3,Not very much
+Q69,4,None at all
+Q69,-1,Don't know
+Q69,-2,No answer
+Q69,-3,Not applicable
+Q69,-5,Missing
+Q70,1,A great deal
+Q70,2,Quite a lot
+Q70,3,Not very much
+Q70,4,None at all
+Q70,-1,Don't know
+Q70,-2,No answer
+Q70,-3,Not applicable
+Q70,-5,Missing
+Q71,1,A great deal
+Q71,2,Quite a lot
+Q71,3,Not very much
+Q71,4,None at all
+Q71,-1,Don't know
+Q71,-2,No answer
+Q71,-3,Not applicable
+Q71,-5,Missing
+Q72,1,A great deal
+Q72,2,Quite a lot
+Q72,3,Not very much
+Q72,4,None at all
+Q72,-1,Don't know
+Q72,-2,No answer
+Q72,-3,Not applicable
+Q72,-5,Missing
+Q73,1,A great deal
+Q73,2,Quite a lot
+Q73,3,Not very much
+Q73,4,None at all
+Q73,-1,Don't know
+Q73,-2,No answer
+Q73,-3,Not applicable
+Q73,-5,Missing
+Q74,1,A great deal
+Q74,2,Quite a lot
+Q74,3,Not very much
+Q74,4,None at all
+Q74,-1,Don't know
+Q74,-2,No answer
+Q74,-3,Not applicable
+Q74,-5,Missing
+Q75,1,A great deal
+Q75,2,Quite a lot
+Q75,3,Not very much
+Q75,4,None at all
+Q75,-1,Don't know
+Q75,-2,No answer
+Q75,-3,Not applicable
+Q75,-5,Missing
+Q76,1,A great deal
+Q76,2,Quite a lot
+Q76,3,Not very much
+Q76,4,None at all
+Q76,-1,Don't know
+Q76,-2,No answer
+Q76,-3,Not applicable
+Q76,-5,Missing
+Q77,1,A great deal
+Q77,2,Quite a lot
+Q77,3,Not very much
+Q77,4,None at all
+Q77,-1,Don't know
+Q77,-2,No answer
+Q77,-3,Not applicable
+Q77,-5,Missing
+Q78,1,A great deal
+Q78,2,Quite a lot
+Q78,3,Not very much
+Q78,4,None at all
+Q78,-1,Don't know
+Q78,-2,No answer
+Q78,-3,Not applicable
+Q78,-5,Missing
+Q79,1,A great deal
+Q79,2,Quite a lot
+Q79,3,Not very much
+Q79,4,None at all
+Q79,-1,Don't know
+Q79,-2,No answer
+Q79,-3,Not applicable
+Q79,-5,Missing
+Q80,1,A great deal
+Q80,2,Quite a lot
+Q80,3,Not very much
+Q80,4,None at all
+Q80,-1,Don't know
+Q80,-2,No answer
+Q80,-3,Not applicable
+Q80,-5,Missing
+Q81,1,A great deal
+Q81,2,Quite a lot
+Q81,3,Not very much
+Q81,4,None at all
+Q81,-1,Don't know
+Q81,-2,No answer
+Q81,-3,Not applicable
+Q81,-5,Missing
+Q82,1,A great deal
+Q82,2,Quite a lot
+Q82,3,Not very much
+Q82,4,None at all
+Q82,-1,Don't know
+Q82,-2,No answer
+Q82,-3,Not applicable
+Q82,-5,Missing
+Q83,1,A great deal
+Q83,2,Quite a lot
+Q83,3,Not very much
+Q83,4,None at all
+Q83,-1,Don't know
+Q83,-2,No answer
+Q83,-3,Not applicable
+Q83,-5,Missing
+Q84,1,A great deal
+Q84,2,Quite a lot
+Q84,3,Not very much
+Q84,4,None at all
+Q84,-1,Don't know
+Q84,-2,No answer
+Q84,-3,Not applicable
+Q84,-5,Missing
+Q85,1,A great deal
+Q85,2,Quite a lot
+Q85,3,Not very much
+Q85,4,None at all
+Q85,-1,Don't know
+Q85,-2,No answer
+Q85,-3,Not applicable
+Q85,-5,Missing
+Q86,1,A great deal
+Q86,2,Quite a lot
+Q86,3,Not very much
+Q86,4,None at all
+Q86,-1,Don't know
+Q86,-2,No answer
+Q86,-3,Not applicable
+Q86,-5,Missing
+Q87,1,A great deal
+Q87,2,Quite a lot
+Q87,3,Not very much
+Q87,4,None at all
+Q87,-1,Don't know
+Q87,-2,No answer
+Q87,-3,Not applicable
+Q87,-5,Missing
+Q88,1,A great deal
+Q88,2,Quite a lot
+Q88,3,Not very much
+Q88,4,None at all
+Q88,-1,Don't know
+Q88,-2,No answer
+Q88,-3,Not applicable
+Q88,-5,Missing
+Q89,1,A great deal
+Q89,2,Quite a lot
+Q89,3,Not very much
+Q89,4,None at all
+Q89,-1,Don't know
+Q89,-2,No answer
+Q89,-3,Not applicable
+Q89,-5,Missing
+Q91,1,France
+Q91,2,China
+Q91,3,India
+Q91,-1,Don't know
+Q91,-2,No answer
+Q91,-3,Not applicable
+Q91,-5,Missing
+Q92,1,Washington DC
+Q92,2,London
+Q92,3,Geneva
+Q92,-1,Don't know
+Q92,-2,No answer
+Q92,-3,Not applicable
+Q92,-5,Missing
+Q93,1,Climate change
+Q93,2,Human rights
+Q93,3,Destruction of historic monuments
+Q93,-1,Don't know
+Q93,-2,No answer
+Q93,-3,Not applicable
+Q93,-5,Missing
+Q94,2,Active member
+Q94,1,Inactive member
+Q94,0,Don't belong
+Q94,-1,Don't know
+Q94,-2,No answer
+Q94,-3,Not applicable
+Q94,-5,Missing
+Q95,2,Active member
+Q95,1,Inactive member
+Q95,0,Don't belong
+Q95,-1,Don't know
+Q95,-2,No answer
+Q95,-3,Not applicable
+Q95,-5,Missing
+Q96,2,Active member
+Q96,1,Inactive member
+Q96,0,Don't belong
+Q96,-1,Don't know
+Q96,-2,No answer
+Q96,-3,Not applicable
+Q96,-5,Missing
+Q97,2,Active member
+Q97,1,Inactive member
+Q97,0,Don't belong
+Q97,-1,Don't know
+Q97,-2,No answer
+Q97,-3,Not applicable
+Q97,-5,Missing
+Q98,2,Active member
+Q98,1,Inactive member
+Q98,0,Don't belong
+Q98,-1,Don't know
+Q98,-2,No answer
+Q98,-3,Not applicable
+Q98,-5,Missing
+Q99,2,Active member
+Q99,1,Inactive member
+Q99,0,Don't belong
+Q99,-1,Don't know
+Q99,-2,No answer
+Q99,-3,Not applicable
+Q99,-5,Missing
+Q100,2,Active member
+Q100,1,Inactive member
+Q100,0,Don't belong
+Q100,-1,Don't know
+Q100,-2,No answer
+Q100,-3,Not applicable
+Q100,-5,Missing
+Q101,2,Active member
+Q101,1,Inactive member
+Q101,0,Don't belong
+Q101,-1,Don't know
+Q101,-2,No answer
+Q101,-3,Not applicable
+Q101,-5,Missing
+Q102,2,Active member
+Q102,1,Inactive member
+Q102,0,Don't belong
+Q102,-1,Don't know
+Q102,-2,No answer
+Q102,-3,Not applicable
+Q102,-5,Missing
+Q103,2,Active member
+Q103,1,Inactive member
+Q103,0,Don't belong
+Q103,-1,Don't know
+Q103,-2,No answer
+Q103,-3,Not applicable
+Q103,-5,Missing
+Q104,2,Active member
+Q104,1,Inactive member
+Q104,0,Don't belong
+Q104,-1,Don't know
+Q104,-2,No answer
+Q104,-3,Not applicable
+Q104,-5,Missing
+Q105,2,Active member
+Q105,1,Inactive member
+Q105,0,Don't belong
+Q105,-1,Don't know
+Q105,-2,No answer
+Q105,-3,Not applicable
+Q105,-5,Missing
+Q111,1,"Protecting the environment should be given priority, even if it causes slower economic growth and some loss of jobs."
+Q111,2,"Economic growth and creating jobs should be the top priority, even if the environment suffers to some extent."
+Q111,3,Other answer (code if volunteered only!).
+Q111,-1,Don't know
+Q111,-2,No answer
+Q111,-3,Not applicable
+Q111,-5,Missing
+Q113,1,None of them
+Q113,2,Few of them
+Q113,3,Most of them
+Q113,4,All of them
+Q113,-1,Don't know
+Q113,-2,No answer
+Q113,-3,Not applicable
+Q113,-5,Missing
+Q114,1,None of them
+Q114,2,Few of them
+Q114,3,Most of them
+Q114,4,All of them
+Q114,-1,Don't know
+Q114,-2,No answer
+Q114,-3,Not applicable
+Q114,-5,Missing
+Q115,1,None of them
+Q115,2,Few of them
+Q115,3,Most of them
+Q115,4,All of them
+Q115,-1,Don't know
+Q115,-2,No answer
+Q115,-3,Not applicable
+Q115,-5,Missing
+Q116,1,None of them
+Q116,2,Few of them
+Q116,3,Most of them
+Q116,4,All of them
+Q116,-1,Don't know
+Q116,-2,No answer
+Q116,-3,Not applicable
+Q116,-5,Missing
+Q117,1,None of them
+Q117,2,Few of them
+Q117,3,Most of them
+Q117,4,All of them
+Q117,-1,Don't know
+Q117,-2,No answer
+Q117,-3,Not applicable
+Q117,-5,Missing
+Q118,1,Never
+Q118,2,Rarely
+Q118,3,Frequently
+Q118,4,Always
+Q118,-1,Don't know
+Q118,-2,No answer
+Q118,-3,Not applicable
+Q118,-5,Missing
+Q119,1,Strongly agree
+Q119,2,Agree
+Q119,3,Disagree
+Q119,4,Strongly disagree
+Q119,0,Hard to say
+Q119,-1,Don't know
+Q119,-2,No answer
+Q119,-3,Not applicable
+Q119,-5,Missing
+Q121,5,Very good
+Q121,4,Quite good
+Q121,3,Neither good nor bad
+Q121,2,Quite bad
+Q121,1,Very bad
+Q121,-1,Don't know
+Q121,-2,No answer
+Q121,-3,Not applicable
+Q121,-5,Missing
+Q122,2,Agree
+Q122,1,Hard to say
+Q122,0,Disagree
+Q122,-1,Don't know
+Q122,-2,No answer
+Q122,-3,Not applicable
+Q122,-5,Missing
+Q123,2,Agree
+Q123,1,Hard to say
+Q123,0,Disagree
+Q123,-1,Don't know
+Q123,-2,No answer
+Q123,-3,Not applicable
+Q123,-5,Missing
+Q124,2,Agree
+Q124,1,Hard to say
+Q124,0,Disagree
+Q124,-1,Don't know
+Q124,-2,No answer
+Q124,-3,Not applicable
+Q124,-5,Missing
+Q125,2,Agree
+Q125,1,Hard to say
+Q125,0,Disagree
+Q125,-1,Don't know
+Q125,-2,No answer
+Q125,-3,Not applicable
+Q125,-5,Missing
+Q126,2,Agree
+Q126,1,Hard to say
+Q126,0,Disagree
+Q126,-1,Don't know
+Q126,-2,No answer
+Q126,-3,Not applicable
+Q126,-5,Missing
+Q127,2,Agree
+Q127,1,Hard to say
+Q127,0,Disagree
+Q127,-1,Don't know
+Q127,-2,No answer
+Q127,-3,Not applicable
+Q127,-5,Missing
+Q128,2,Agree
+Q128,1,Hard to say
+Q128,0,Disagree
+Q128,-1,Don't know
+Q128,-2,No answer
+Q128,-3,Not applicable
+Q128,-5,Missing
+Q129,2,Agree
+Q129,1,Hard to say
+Q129,0,Disagree
+Q129,-1,Don't know
+Q129,-2,No answer
+Q129,-3,Not applicable
+Q129,-5,Missing
+Q130,1,Let anyone come who wants to
+Q130,2,Let people come as long as there are jobs available
+Q130,3,Place strict limits on the number of foreigners who can come here
+Q130,4,Prohibit people coming here from other countries
+Q130,-1,Don't know
+Q130,-2,No answer
+Q130,-3,Not applicable
+Q130,-5,Missing
+Q131,1,Very secure
+Q131,2,Quite secure
+Q131,3,Not very secure
+Q131,4,Not at all secure
+Q131,-1,Don't know
+Q131,-2,No answer
+Q131,-3,Not applicable
+Q131,-5,Missing
+Q132,1,Very frequently
+Q132,2,Quite frequently
+Q132,3,Not frequently
+Q132,4,Not at all frequently
+Q132,-1,Don't know
+Q132,-2,No answer
+Q132,-3,Not applicable
+Q132,-5,Missing
+Q133,1,Very frequently
+Q133,2,Quite frequently
+Q133,3,Not frequently
+Q133,4,Not at all frequently
+Q133,-1,Don't know
+Q133,-2,No answer
+Q133,-3,Not applicable
+Q133,-5,Missing
+Q134,1,Very frequently
+Q134,2,Quite frequently
+Q134,3,Not frequently
+Q134,4,Not at all frequently
+Q134,-1,Don't know
+Q134,-2,No answer
+Q134,-3,Not applicable
+Q134,-5,Missing
+Q135,1,Very frequently
+Q135,2,Quite frequently
+Q135,3,Not frequently
+Q135,4,Not at all frequently
+Q135,-1,Don't know
+Q135,-2,No answer
+Q135,-3,Not applicable
+Q135,-5,Missing
+Q136,1,Very frequently
+Q136,2,Quite frequently
+Q136,3,Not frequently
+Q136,4,Not at all frequently
+Q136,-1,Don't know
+Q136,-2,No answer
+Q136,-3,Not applicable
+Q136,-5,Missing
+Q137,1,Very frequently
+Q137,2,Quite frequently
+Q137,3,Not frequently
+Q137,4,Not at all frequently
+Q137,-1,Don't know
+Q137,-2,No answer
+Q137,-3,Not applicable
+Q137,-5,Missing
+Q138,1,Very frequently
+Q138,2,Quite frequently
+Q138,3,Not frequently
+Q138,4,Not at all frequently
+Q138,-1,Don't know
+Q138,-2,No answer
+Q138,-3,Not applicable
+Q138,-5,Missing
+Q139,1,Yes
+Q139,2,No
+Q139,-1,Don't know
+Q139,-2,No answer
+Q139,-3,Not applicable
+Q139,-5,Missing
+Q140,1,Yes
+Q140,2,No
+Q140,-1,Don't know
+Q140,-2,No answer
+Q140,-3,Not applicable
+Q140,-5,Missing
+Q141,1,Yes
+Q141,2,No
+Q141,-1,Don't know
+Q141,-2,No answer
+Q141,-3,Not applicable
+Q141,-5,Missing
+Q142,1,Very much
+Q142,2,A good deal
+Q142,3,Not much
+Q142,4,Not at all
+Q142,-1,Don't know
+Q142,-2,No answer
+Q142,-3,Not applicable
+Q142,-5,Missing
+Q143,1,Very much
+Q143,2,A good deal
+Q143,3,Not much
+Q143,4,Not at all
+Q143,-1,Don't know
+Q143,-2,No answer
+Q143,-3,Not applicable
+Q143,-5,Missing
+Q144,1,Yes
+Q144,2,No
+Q144,-1,Don't know
+Q144,-2,No answer
+Q144,-3,Not applicable
+Q144,-5,Missing
+Q145,1,Yes
+Q145,2,No
+Q145,-1,Don't know
+Q145,-2,No answer
+Q145,-3,Not applicable
+Q145,-5,Missing
+Q146,1,Very much
+Q146,2,A good deal
+Q146,3,Not much
+Q146,4,Not at all
+Q146,-1,Don't know
+Q146,-2,No answer
+Q146,-3,Not applicable
+Q146,-5,Missing
+Q147,1,Very much
+Q147,2,A good deal
+Q147,3,Not much
+Q147,4,Not at all
+Q147,-1,Don't know
+Q147,-2,No answer
+Q147,-3,Not applicable
+Q147,-5,Missing
+Q148,1,Very much
+Q148,2,A good deal
+Q148,3,Not much
+Q148,4,Not at all
+Q148,-1,Don't know
+Q148,-2,No answer
+Q148,-3,Not applicable
+Q148,-5,Missing
+Q149,1,Freedom
+Q149,2,Equality
+Q149,-1,Don't know
+Q149,-2,No answer
+Q149,-3,Not applicable
+Q149,-5,Missing
+Q150,1,Freedom
+Q150,2,Security
+Q150,-1,Don't know
+Q150,-2,No answer
+Q150,-3,Not applicable
+Q150,-5,Missing
+Q151,1,Yes
+Q151,2,No
+Q151,-1,Don't know
+Q151,-2,No answer
+Q151,-3,Not applicable
+Q151,-5,Missing
+Q152,1,A high level of economic growth
+Q152,2,Making sure this country has strong defense forces
+Q152,3,Seeing that people have more say about how things are done at their jobs and in their communities
+Q152,4,Trying to make our cities and countryside more beautiful
+Q152,-1,Don't know
+Q152,-2,No answer
+Q152,-3,Not applicable
+Q152,-5,Missing
+Q153,1,A high level of economic growth
+Q153,2,Making sure this country has strong defense forces
+Q153,3,Seeing that people have more say about how things are done at their jobs and in their communities
+Q153,4,Trying to make our cities and countryside more beautiful
+Q153,-1,Don't know
+Q153,-2,No answer
+Q153,-3,Not applicable
+Q153,-5,Missing
+Q154,1,Maintaining order in the nation
+Q154,2,Giving people more say in important government decisions
+Q154,3,Fighting rising prices
+Q154,4,Protecting freedom of speech
+Q154,-1,Don't know
+Q154,-2,No answer
+Q154,-3,Not applicable
+Q154,-5,Missing
+Q155,1,Maintaining order in the nation
+Q155,2,Giving people more say in important government decisions
+Q155,3,Fighting rising prices
+Q155,4,Protecting freedom of speech
+Q155,-1,Don't know
+Q155,-2,No answer
+Q155,-3,Not applicable
+Q155,-5,Missing
+Q156,1,A stable economy
+Q156,2,Progress toward a less impersonal and more humane society
+Q156,3,Progress toward a society in which ideas count more than money
+Q156,4,The fight against crime
+Q156,-1,Don't know
+Q156,-2,No answer
+Q156,-3,Not applicable
+Q156,-5,Missing
+Q157,1,A stable economy
+Q157,2,Progress toward a less impersonal and more humane society
+Q157,3,Progress toward a society in which ideas count more than money
+Q157,4,The fight against crime
+Q157,-1,Don't know
+Q157,-2,No answer
+Q157,-3,Not applicable
+Q157,-5,Missing
+Q165,1,Yes
+Q165,2,No
+Q165,-1,Don't know
+Q165,-2,No answer
+Q165,-3,Not applicable
+Q165,-5,Missing
+Q166,1,Yes
+Q166,2,No
+Q166,-1,Don't know
+Q166,-2,No answer
+Q166,-3,Not applicable
+Q166,-5,Missing
+Q167,1,Yes
+Q167,2,No
+Q167,-1,Don't know
+Q167,-2,No answer
+Q167,-3,Not applicable
+Q167,-5,Missing
+Q168,1,Yes
+Q168,2,No
+Q168,-1,Don't know
+Q168,-2,No answer
+Q168,-3,Not applicable
+Q168,-5,Missing
+Q169,1,Strongly agree
+Q169,2,Agree
+Q169,3,Disagree
+Q169,4,Strongly disagree
+Q169,-1,Don't know
+Q169,-2,No answer
+Q169,-3,Not applicable
+Q169,-5,Missing
+Q170,1,Strongly agree
+Q170,2,Agree
+Q170,3,Disagree
+Q170,4,Strongly disagree
+Q170,-1,Don't know
+Q170,-2,No answer
+Q170,-3,Not applicable
+Q170,-5,Missing
+Q173,1,A religious person
+Q173,2,Not a religious person
+Q173,3,An atheist
+Q173,-1,Don't know
+Q173,-2,No answer
+Q173,-3,Not applicable
+Q173,-5,Missing
+Q174,1,To follow religious norms and ceremonies
+Q174,2,To do good to other people
+Q174,-1,Don't know
+Q174,-2,No answer
+Q174,-3,Not applicable
+Q174,-5,Missing
+Q175,1,To make sense of life after death
+Q175,2,To make sense of life in this world
+Q175,-1,Don't know
+Q175,-2,No answer
+Q175,-3,Not applicable
+Q175,-5,Missing
+Q196,1,Definitely should have the right
+Q196,2,Probably should have the right
+Q196,3,Probably should not have the right
+Q196,4,Definitely should not have the right
+Q196,-1,Don't know
+Q196,-2,No answer
+Q196,-3,Not applicable
+Q196,-5,Missing
+Q197,1,Definitely should have the right
+Q197,2,Probably should have the right
+Q197,3,Probably should not have the right
+Q197,4,Definitely should not have the right
+Q197,-1,Don't know
+Q197,-2,No answer
+Q197,-3,Not applicable
+Q197,-5,Missing
+Q198,1,Definitely should have the right
+Q198,2,Probably should have the right
+Q198,3,Probably should not have the right
+Q198,4,Definitely should not have the right
+Q198,-1,Don't know
+Q198,-2,No answer
+Q198,-3,Not applicable
+Q198,-5,Missing
+Q199,1,Very interested
+Q199,2,Somewhat interested
+Q199,3,Not very interested
+Q199,4,Not at all interested
+Q199,-1,Don't know
+Q199,-2,No answer
+Q199,-3,Not applicable
+Q199,-5,Missing
+Q200,1,Frequently
+Q200,2,Occasionally
+Q200,3,Never
+Q200,-1,Don't know
+Q200,-2,No answer
+Q200,-3,Not applicable
+Q200,-5,Missing
+Q201,1,Daily
+Q201,2,Weekly
+Q201,3,Monthly
+Q201,4,Less than monthly
+Q201,5,Never
+Q201,-1,Don't know
+Q201,-2,No answer
+Q201,-3,Not applicable
+Q201,-5,Missing
+Q202,1,Daily
+Q202,2,Weekly
+Q202,3,Monthly
+Q202,4,Less than monthly
+Q202,5,Never
+Q202,-1,Don't know
+Q202,-2,No answer
+Q202,-3,Not applicable
+Q202,-5,Missing
+Q203,1,Daily
+Q203,2,Weekly
+Q203,3,Monthly
+Q203,4,Less than monthly
+Q203,5,Never
+Q203,-1,Don't know
+Q203,-2,No answer
+Q203,-3,Not applicable
+Q203,-5,Missing
+Q204,1,Daily
+Q204,2,Weekly
+Q204,3,Monthly
+Q204,4,Less than monthly
+Q204,5,Never
+Q204,-1,Don't know
+Q204,-2,No answer
+Q204,-3,Not applicable
+Q204,-5,Missing
+Q205,1,Daily
+Q205,2,Weekly
+Q205,3,Monthly
+Q205,4,Less than monthly
+Q205,5,Never
+Q205,-1,Don't know
+Q205,-2,No answer
+Q205,-3,Not applicable
+Q205,-5,Missing
+Q206,1,Daily
+Q206,2,Weekly
+Q206,3,Monthly
+Q206,4,Less than monthly
+Q206,5,Never
+Q206,-1,Don't know
+Q206,-2,No answer
+Q206,-3,Not applicable
+Q206,-5,Missing
+Q207,1,Daily
+Q207,2,Weekly
+Q207,3,Monthly
+Q207,4,Less than monthly
+Q207,5,Never
+Q207,-1,Don't know
+Q207,-2,No answer
+Q207,-3,Not applicable
+Q207,-5,Missing
+Q208,1,Daily
+Q208,2,Weekly
+Q208,3,Monthly
+Q208,4,Less than monthly
+Q208,5,Never
+Q208,-1,Don't know
+Q208,-2,No answer
+Q208,-3,Not applicable
+Q208,-5,Missing
+Q209,1,Have done
+Q209,2,Might do
+Q209,3,Would never do
+Q209,-1,Don't know
+Q209,-2,No answer
+Q209,-3,Not applicable
+Q209,-5,Missing
+Q210,1,Have done
+Q210,2,Might do
+Q210,3,Would never do
+Q210,-1,Don't know
+Q210,-2,No answer
+Q210,-3,Not applicable
+Q210,-5,Missing
+Q211,1,Have done
+Q211,2,Might do
+Q211,3,Would never do
+Q211,-1,Don't know
+Q211,-2,No answer
+Q211,-3,Not applicable
+Q211,-5,Missing
+Q212,1,Have done
+Q212,2,Might do
+Q212,3,Would never do
+Q212,-1,Don't know
+Q212,-2,No answer
+Q212,-3,Not applicable
+Q212,-5,Missing
+Q213,1,Have done
+Q213,2,Might do
+Q213,3,Would never do
+Q213,-1,Don't know
+Q213,-2,No answer
+Q213,-3,Not applicable
+Q213,-5,Missing
+Q214,1,Have done
+Q214,2,Might do
+Q214,3,Would never do
+Q214,-1,Don't know
+Q214,-2,No answer
+Q214,-3,Not applicable
+Q214,-5,Missing
+Q215,1,Have done
+Q215,2,Might do
+Q215,3,Would never do
+Q215,-1,Don't know
+Q215,-2,No answer
+Q215,-3,Not applicable
+Q215,-5,Missing
+Q216,1,Have done
+Q216,2,Might do
+Q216,3,Would never do
+Q216,-1,Don't know
+Q216,-2,No answer
+Q216,-3,Not applicable
+Q216,-5,Missing
+Q217,1,Have done
+Q217,2,Might do
+Q217,3,Would never do
+Q217,-1,Don't know
+Q217,-2,No answer
+Q217,-3,Not applicable
+Q217,-5,Missing
+Q218,1,Have done
+Q218,2,Might do
+Q218,3,Would never do
+Q218,-1,Don't know
+Q218,-2,No answer
+Q218,-3,Not applicable
+Q218,-5,Missing
+Q219,1,Have done
+Q219,2,Might do
+Q219,3,Would never do
+Q219,-1,Don't know
+Q219,-2,No answer
+Q219,-3,Not applicable
+Q219,-5,Missing
+Q220,1,Have done
+Q220,2,Might do
+Q220,3,Would never do
+Q220,-1,Don't know
+Q220,-2,No answer
+Q220,-3,Not applicable
+Q220,-5,Missing
+Q221,1,Always
+Q221,2,Usually
+Q221,3,Never
+Q221,4,Not allowed to vote
+Q221,-1,Don't know
+Q221,-2,No answer
+Q221,-3,Not applicable
+Q221,-5,Missing
+Q222,1,Always
+Q222,2,Usually
+Q222,3,Never
+Q222,4,Not allowed to vote
+Q222,-1,Don't know
+Q222,-2,No answer
+Q222,-3,Not applicable
+Q222,-5,Missing
+Q224,1,Very often
+Q224,2,Fairly often
+Q224,3,Not often
+Q224,4,Not at all often
+Q224,-1,Don't know
+Q224,-2,No answer
+Q224,-3,Not applicable
+Q224,-5,Missing
+Q225,1,Very often
+Q225,2,Fairly often
+Q225,3,Not often
+Q225,4,Not at all often
+Q225,-1,Don't know
+Q225,-2,No answer
+Q225,-3,Not applicable
+Q225,-5,Missing
+Q226,1,Very often
+Q226,2,Fairly often
+Q226,3,Not often
+Q226,4,Not at all often
+Q226,-1,Don't know
+Q226,-2,No answer
+Q226,-3,Not applicable
+Q226,-5,Missing
+Q227,1,Very often
+Q227,2,Fairly often
+Q227,3,Not often
+Q227,4,Not at all often
+Q227,-1,Don't know
+Q227,-2,No answer
+Q227,-3,Not applicable
+Q227,-5,Missing
+Q228,1,Very often
+Q228,2,Fairly often
+Q228,3,Not often
+Q228,4,Not at all often
+Q228,-1,Don't know
+Q228,-2,No answer
+Q228,-3,Not applicable
+Q228,-5,Missing
+Q229,1,Very often
+Q229,2,Fairly often
+Q229,3,Not often
+Q229,4,Not at all often
+Q229,-1,Don't know
+Q229,-2,No answer
+Q229,-3,Not applicable
+Q229,-5,Missing
+Q230,1,Very often
+Q230,2,Fairly often
+Q230,3,Not often
+Q230,4,Not at all often
+Q230,-1,Don't know
+Q230,-2,No answer
+Q230,-3,Not applicable
+Q230,-5,Missing
+Q231,1,Very often
+Q231,2,Fairly often
+Q231,3,Not often
+Q231,4,Not at all often
+Q231,-1,Don't know
+Q231,-2,No answer
+Q231,-3,Not applicable
+Q231,-5,Missing
+Q232,1,Very often
+Q232,2,Fairly often
+Q232,3,Not often
+Q232,4,Not at all often
+Q232,-1,Don't know
+Q232,-2,No answer
+Q232,-3,Not applicable
+Q232,-5,Missing
+Q233,1,Very often
+Q233,2,Fairly often
+Q233,3,Not often
+Q233,4,Not at all often
+Q233,-1,Don't know
+Q233,-2,No answer
+Q233,-3,Not applicable
+Q233,-5,Missing
+Q234,1,Very important
+Q234,2,Rather important
+Q234,3,Not very important
+Q234,4,Not at all important
+Q234,-1,Don't know
+Q234,-2,No answer
+Q234,-3,Not applicable
+Q234,-5,Missing
+Q235,1,Very good
+Q235,2,Fairly good
+Q235,3,Fairly bad
+Q235,4,Very bad
+Q235,-1,Don't know
+Q235,-2,No answer
+Q235,-3,Not applicable
+Q235,-5,Missing
+Q236,1,Very good
+Q236,2,Fairly good
+Q236,3,Fairly bad
+Q236,4,Very bad
+Q236,-1,Don't know
+Q236,-2,No answer
+Q236,-3,Not applicable
+Q236,-5,Missing
+Q237,1,Very good
+Q237,2,Fairly good
+Q237,3,Fairly bad
+Q237,4,Very bad
+Q237,-1,Don't know
+Q237,-2,No answer
+Q237,-3,Not applicable
+Q237,-5,Missing
+Q238,1,Very good
+Q238,2,Fairly good
+Q238,3,Fairly bad
+Q238,4,Very bad
+Q238,-1,Don't know
+Q238,-2,No answer
+Q238,-3,Not applicable
+Q238,-5,Missing
+Q239,1,Very good
+Q239,2,Fairly good
+Q239,3,Fairly bad
+Q239,4,Very bad
+Q239,-1,Don't know
+Q239,-2,No answer
+Q239,-3,Not applicable
+Q239,-5,Missing
+Q253,1,A great deal of respect for individual human rights
+Q253,2,Fairly much respect
+Q253,3,Not much respect
+Q253,4,No respect at all
+Q253,-1,Don't know
+Q253,-2,No answer
+Q253,-3,Not applicable
+Q253,-5,Missing
+Q254,1,Very proud
+Q254,2,Quite proud
+Q254,3,Not very proud
+Q254,4,Not at all proud
+Q254,5,I am not
+Q254,-1,Don't know
+Q254,-2,No answer
+Q254,-3,Not applicable
+Q254,-5,Missing
+Q255,1,Very close
+Q255,2,Close
+Q255,3,Not very close
+Q255,4,Not close at all
+Q255,-1,Don't know
+Q255,-2,No answer
+Q255,-3,Not applicable
+Q255,-5,Missing
+Q256,1,Very close
+Q256,2,Close
+Q256,3,Not very close
+Q256,4,Not close at all
+Q256,-1,Don't know
+Q256,-2,No answer
+Q256,-3,Not applicable
+Q256,-5,Missing
+Q257,1,Very close
+Q257,2,Close
+Q257,3,Not very close
+Q257,4,Not close at all
+Q257,-1,Don't know
+Q257,-2,No answer
+Q257,-3,Not applicable
+Q257,-5,Missing
+Q258,1,Very close
+Q258,2,Close
+Q258,3,Not very close
+Q258,4,Not close at all
+Q258,-1,Don't know
+Q258,-2,No answer
+Q258,-3,Not applicable
+Q258,-5,Missing
+Q259,1,Very close
+Q259,2,Close
+Q259,3,Not very close
+Q259,4,Not close at all
+Q259,-1,Don't know
+Q259,-2,No answer
+Q259,-3,Not applicable
+Q259,-5,Missing

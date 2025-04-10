@@ -60,8 +60,8 @@ def convert_csv_to_jsonl(csv_filepath, jsonl_filepath):
 file_prefixes = ['train', 'valid', 'test']
 
 for prefix in file_prefixes:
-    csv_file = f'1_data_preprocessing/empatheticdialogues/{prefix}.csv'
-    jsonl_file = f'1_data_preprocessing/empatheticdialogues/{prefix}.jsonl'
+    csv_file = f'1_data_preprocessing/dataset/empatheticdialogues/{prefix}.csv'
+    jsonl_file = f'1_data_preprocessing/dataset/empatheticdialogues/{prefix}.jsonl'
     convert_csv_to_jsonl(csv_file, jsonl_file)
     print(f"Conversion complete. {prefix} JSONL file created at: {jsonl_file}")
 
