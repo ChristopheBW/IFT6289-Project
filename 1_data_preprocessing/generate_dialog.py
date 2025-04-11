@@ -18,6 +18,7 @@ DELAY_BETWEEN_CALLS = 1 # Optional delay
 # Add slight variation to temperature per call?
 RANDOMIZE_TEMP = True
 BASE_TEMPERATURE = 0.75
+RETRY_PATIENCE = 3  # Number of retry attempts before giving up on a seed topic
 
 # --- Revised System Prompt ---
 SYSTEM_PROMPT = """You are an AI assistant tasked with generating **multiple, diverse, and realistic** multi-turn dialogues based on a single cultural context prompt.
@@ -168,10 +169,12 @@ if __name__ == "__main__":
     total_dialogues_generated = 0
     api_call_errors = 0
     validation_failures = 0 # Count API calls that returned invalid structure
+    successful_retries = 0 # Count number of successful retries
 
     print(f"Starting batch dialogue generation...")
     print(f" - Dialogues requested per API call: {DIALOGUES_PER_API_CALL}")
     print(f" - Total API calls planned: {total_seeds}")
+    print(f" - Retry attempts per seed: {RETRY_PATIENCE}")
     print(f" - Output file: {OUTPUT_JSONL}")
 
     with open(OUTPUT_JSONL, 'a', encoding='utf-8') as outfile:
@@ -193,48 +196,63 @@ Output ONLY the JSON object containing the list of dialogues."""
                 {"role": "user", "content": user_prompt}
             ]
 
-            current_temp = BASE_TEMPERATURE
-            if RANDOMIZE_TEMP:
-                 current_temp = max(0.1, min(1.0, BASE_TEMPERATURE + random.uniform(-0.1, 0.1)))
+            success = False
+            retry_count = 0
+            
+            while not success and retry_count <= RETRY_PATIENCE:
+                if retry_count > 0:
+                    print(f"\nRetrying seed {index} (attempt {retry_count}/{RETRY_PATIENCE})...")
+                
+                current_temp = BASE_TEMPERATURE
+                if RANDOMIZE_TEMP:
+                    current_temp = max(0.1, min(1.0, BASE_TEMPERATURE + random.uniform(-0.1, 0.1)))
 
+                try:
+                    completion = client.chat.completions.create(
+                        model=MODEL_NAME,
+                        messages=messages,
+                        temperature=current_temp,
+                        # response_format={ "type": "json_object" }, # Use if API supports strict JSON mode
+                        # max_tokens=2048 # Increase if needed, watch out for limits
+                    )
+                    response_content = completion.choices[0].message.content
 
-            try:
-                completion = client.chat.completions.create(
-                    model=MODEL_NAME,
-                    messages=messages,
-                    temperature=current_temp,
-                    # response_format={ "type": "json_object" }, # Use if API supports strict JSON mode
-                    # max_tokens=2048 # Increase if needed, watch out for limits
-                )
-                response_content = completion.choices[0].message.content
+                    # Validate the entire batch response
+                    validated_dialogue_list = validate_batch_response(response_content, DIALOGUES_PER_API_CALL)
 
-                # Validate the entire batch response
-                validated_dialogue_list = validate_batch_response(response_content, DIALOGUES_PER_API_CALL)
-
-                if validated_dialogue_list is not None: # Validation succeeded (even if list is empty or smaller than requested)
-                    print("DEBUG: validated_dialogue_list", validated_dialogue_list)
-                    if validated_dialogue_list: # Check if list is not empty
+                    if validated_dialogue_list is not None and validated_dialogue_list: # Validation succeeded and list is not empty
                         for dialogue_obj in validated_dialogue_list:
                             # Write each valid dialogue object as a line
                             outfile.write(json.dumps(dialogue_obj, ensure_ascii=False) + '\n')
                         total_dialogues_generated += len(validated_dialogue_list)
-                    # else: (Handle case where API returned valid structure but empty list if needed)
-                else:
-                    # Validation failed (bad JSON or structure)
-                    print(f"\nError: API call for seed {index} returned invalid batch structure. Discarding response.")
-                    validation_failures += 1
+                        success = True
+                        if retry_count > 0:
+                            successful_retries += 1
+                    else:
+                        # Validation failed (bad JSON or structure) or empty list
+                        if validated_dialogue_list is None:
+                            print(f"\nError: API call for seed {index} returned invalid batch structure.")
+                            validation_failures += 1
+                        else:
+                            print(f"\nWarning: API call for seed {index} returned valid structure but no dialogues.")
+                        retry_count += 1
 
-            except Exception as e:
-                print(f"\nError during API call for seed {index}: {e}")
-                api_call_errors += 1
+                except Exception as e:
+                    print(f"\nError during API call for seed {index}: {e}")
+                    api_call_errors += 1
+                    retry_count += 1
 
-            # Optional delay
-            if DELAY_BETWEEN_CALLS > 0:
-                time.sleep(DELAY_BETWEEN_CALLS)
+                # Optional delay between attempts (even before retries)
+                if DELAY_BETWEEN_CALLS > 0:
+                    time.sleep(DELAY_BETWEEN_CALLS)
+            
+            if not success:
+                print(f"\nGiving up on seed {index} after {RETRY_PATIENCE} retry attempts.")
 
     print("\n--- Generation Summary ---")
     print(f"Total API calls attempted: {total_seeds}")
     print(f" - API call errors: {api_call_errors}")
     print(f" - Responses with invalid structure: {validation_failures}")
+    print(f" - Successful retries: {successful_retries}")
     print(f"Successfully generated and wrote {total_dialogues_generated} individual dialogues.")
     print(f"Output saved to {OUTPUT_JSONL}")
