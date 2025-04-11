@@ -4,43 +4,52 @@ import time
 import os
 from openai import OpenAI # Use OpenAI library for compatibility
 from tqdm import tqdm # For progress bar
+import random
 
 # --- Configuration ---
-API_KEY_FILE = "apikey.txt" # File containing your API key
-# IMPORTANT: Replace with your actual API endpoint URL
-BASE_URL = "https://api.deepseek.com/"
-# IMPORTANT: Specify the model you want to use (e.g., "gpt-4o", "gemini-pro", or the one compatible with your endpoint)
-MODEL_NAME = "deepseek-chat" # Replace if needed
-# Path to your input CSV file (containing cultural seeds)
+API_KEY_FILE = "apikey.txt"
+BASE_URL = "https://api.deepseek.com" # IMPORTANT: Replace
+MODEL_NAME = "deepseek-chat" # IMPORTANT: Replace if needed
 INPUT_CSV = "1_data_preprocessing/dataset/culture_wvs/majority_answers_CHN_50pct_sum_5pct_close.csv"
-# Desired name for the output JSONL file
-OUTPUT_JSONL = "generated_dialogues_CHN.jsonl"
-# Number of dialogues to generate for EACH row in the CSV
-DIALOGUES_PER_SEED = 5 # Adjust as needed (e.g., 50-200)
-# Optional delay between API calls (in seconds) to avoid rate limits
-DELAY_BETWEEN_CALLS = 1 # Adjust if you hit rate limits
+OUTPUT_JSONL = "generated_dialogues_batch_CHN.jsonl"
+# Number of DIFFERENT dialogues to request in EACH API call (per seed topic)
+DIALOGUES_PER_API_CALL = 5 # Adjust (e.g., 3, 5, 10) - balance diversity need vs token limits
+DELAY_BETWEEN_CALLS = 1 # Optional delay
+# Add slight variation to temperature per call?
+RANDOMIZE_TEMP = True
+BASE_TEMPERATURE = 0.75
 
-# --- System Prompt (as defined above) ---
-SYSTEM_PROMPT = """You are an AI assistant tasked with generating realistic, multi-turn dialogues. These dialogues should subtly reflect a specific cultural tendency observed in the World Values Survey for a given country and topic.
+# --- Revised System Prompt ---
+SYSTEM_PROMPT = """You are an AI assistant tasked with generating **multiple, diverse, and realistic** multi-turn dialogues based on a single cultural context prompt.
 
 **Instructions:**
-1.  You will be given the Country, the Survey Topic (Question Text), and the Common Tendency (Answer Text).
-2.  Generate a natural-sounding dialogue between two or more participants (e.g., friends, family, colleagues).
-3.  The dialogue should **implicitly touch upon or reflect** the provided cultural tendency. **Do NOT explicitly state the survey question or answer.** Make it feel like a real conversation where underlying values influence the discussion.
-4.  The dialogue should have between 4 and 8 turns in total (a turn consists of one user utterance and one assistant utterance, or sequential utterances by different implied speakers assigned to 'user' and 'assistant' roles for structure).
-5.  Your **entire response** MUST be a single JSON object.
-6.  The JSON object must contain only one key: `"messages"`.
-7.  The value of `"messages"` must be a list of dictionaries.
-8.  Each dictionary in the list must have two keys: `"role"` (string: either "user" or "assistant") and `"content"` (string: the utterance).
-9.  Vary the scenarios and participant roles for different requests.
+1.  You will be given the Country, Survey Topic, Common Tendency, and the **number of different dialogues** to generate.
+2.  For the provided context, generate the specified number of **distinct** dialogues. Each dialogue should explore **different scenarios, participant roles, or conversation flows** while still subtly reflecting the core cultural tendency.
+3.  Each generated dialogue must be natural-sounding, have between 4 and 8 turns, and **implicitly** reflect the cultural tendency (do NOT state the survey details directly).
+4.  Your **entire response** MUST be a single JSON object.
+5.  This JSON object must contain only one key: `"generated_dialogues"`.
+6.  The value of `"generated_dialogues"` must be a **list**, where each element in the list is a JSON object representing **one complete dialogue**.
+7.  Each dialogue object in the list must follow the format: `{"messages": [{"role": "user" or "assistant", "content": "utterance"}]}`.
 
-**Example Output Format:**
+**Example Output Format (for a request asking for 2 dialogues):**
 {
-  "messages": [
-    {"role": "user", "content": "I've been thinking about applying for that promotion."},
-    {"role": "assistant", "content": "Oh really? That's a big step. Have you considered how it might affect your time with family?"},
-    {"role": "user", "content": "Yeah, that's the main thing holding me back. More responsibility means less flexibility."},
-    {"role": "assistant", "content": "It's a tough balance. Around here, most people seem to prioritize family time quite highly, even if it means slower career progression."}
+  "generated_dialogues": [
+    {
+      "messages": [
+        {"role": "user", "content": "Thinking of taking that overseas assignment..."},
+        {"role": "assistant", "content": "Wow! Exciting, but far from your parents?"},
+        {"role": "user", "content": "Exactly. That's the hard part."},
+        {"role": "assistant", "content": "It's common here to weigh family proximity heavily in such choices."}
+      ]
+    },
+    {
+      "messages": [
+        {"role": "user", "content": "My sister wants to move across the country for college."},
+        {"role": "assistant", "content": "Oh, how are your parents taking it? Being near family is usually a big factor."},
+        {"role": "user", "content": "They're trying to be supportive, but you know how much they value having everyone close."},
+        {"role": "assistant", "content": "Totally understand. It's a different mindset than just pursuing individual goals."}
+      ]
+    }
   ]
 }
 """
@@ -59,43 +68,75 @@ def read_api_key(filepath):
         print(f"Error reading API key file: {e}")
         exit()
 
-def validate_dialogue_json(json_string):
+def validate_individual_dialogue_structure(dialogue_obj):
+    """Validates the structure of a single dialogue object within the list."""
+    if not isinstance(dialogue_obj, dict): return False
+    if "messages" not in dialogue_obj: return False
+    messages = dialogue_obj["messages"]
+    if not isinstance(messages, list): return False
+    if not messages: return False # Ensure not empty
+    for item in messages:
+        if not isinstance(item, dict): return False
+        if "role" not in item or "content" not in item: return False
+        if item["role"] not in ["user", "assistant"]: return False
+        if not isinstance(item["content"], str) or not item["content"]: return False # Ensure content is non-empty string
+    # Basic turn count check
+    if not (4 <= len(messages) <= 12): # Looser check on received data
+         # print(f"Warning: Individual dialogue turn count ({len(messages)}) outside target range (4-8).")
+         pass # Accept dialogues slightly outside range if structure is ok
+    return True
+
+def validate_batch_response(json_string, expected_count):
     """
-    Validates if the string is valid JSON and matches the expected dialogue structure.
-    Returns the parsed dictionary if valid, None otherwise.
+    Validates if the string is valid JSON, matches the batch structure,
+    and contains roughly the expected number of valid individual dialogues.
+    Returns the list of valid dialogue objects if successful, None otherwise.
     """
     try:
         data = json.loads(json_string)
         if not isinstance(data, dict):
+            print("Validation Error: Response is not a JSON object.")
             return None
-        if "messages" not in data:
+        if "generated_dialogues" not in data:
+            print("Validation Error: Missing 'generated_dialogues' key.")
             return None
-        messages = data["messages"]
-        if not isinstance(messages, list):
+        dialogue_list = data["generated_dialogues"]
+        if not isinstance(dialogue_list, list):
+            print("Validation Error: 'generated_dialogues' is not a list.")
             return None
-        if not messages: # Ensure not empty
-             return None
-        for item in messages:
-            if not isinstance(item, dict):
-                return None
-            if "role" not in item or "content" not in item:
-                return None
-            if item["role"] not in ["user", "assistant"]:
-                return None
-            if not isinstance(item["content"], str):
-                 return None
-        # Basic turn count check (adjust range if needed)
-        if not (4 <= len(messages) <= 12): # Allow slightly wider range than prompt target
-             print(f"Warning: Dialogue turn count ({len(messages)}) outside target range (4-8). Accepting anyway.")
-             # return None # Uncomment this line to strictly enforce turn count
 
-        return data # Return the parsed data if validation passes
-    except json.JSONDecodeError:
+        if not dialogue_list:
+            print("Validation Warning: 'generated_dialogues' list is empty.")
+            return [] # Return empty list if API provides empty list
+
+        valid_dialogues = []
+        for i, dialogue_obj in enumerate(dialogue_list):
+            if validate_individual_dialogue_structure(dialogue_obj):
+                valid_dialogues.append(dialogue_obj)
+            else:
+                print(f"Validation Warning: Dialogue at index {i} in the batch has invalid structure. Skipping it.")
+
+        # Check if we got a reasonable number of dialogues back
+        if len(valid_dialogues) < expected_count * 0.5: # Allow getting fewer back, but not drastically fewer
+             print(f"Validation Warning: Received significantly fewer valid dialogues ({len(valid_dialogues)}) than requested ({expected_count}).")
+             # Decide if this is acceptable, maybe return None if too few? For now, accept what's valid.
+
+        if not valid_dialogues:
+             print("Validation Error: No valid dialogues found in the 'generated_dialogues' list.")
+             return None # Treat as failure if NO valid ones found
+
+
+        return valid_dialogues # Return the list of *validated* dialogue objects
+
+    except json.JSONDecodeError as e:
+        print(f"Validation Error: Failed to decode JSON - {e}")
+        # print("------ Received Content Start ------")
+        # print(json_string)
+        # print("------ Received Content End --------")
         return None
     except Exception as e:
         print(f"Unexpected validation error: {e}")
         return None
-
 
 # --- Main Script ---
 
@@ -122,78 +163,78 @@ if __name__ == "__main__":
         print(f"Error reading input CSV: {e}")
         exit()
 
-    # 3. Generate Dialogues
+    # 3. Generate Dialogues (One API call per seed topic)
     total_seeds = len(df)
-    total_dialogues_to_generate = total_seeds * DIALOGUES_PER_SEED
-    generated_count = 0
-    error_count = 0
+    total_dialogues_generated = 0
+    api_call_errors = 0
+    validation_failures = 0 # Count API calls that returned invalid structure
 
-    print(f"Starting dialogue generation...")
-    print(f" - Target dialogues per seed: {DIALOGUES_PER_SEED}")
-    print(f" - Total target dialogues: {total_dialogues_to_generate}")
+    print(f"Starting batch dialogue generation...")
+    print(f" - Dialogues requested per API call: {DIALOGUES_PER_API_CALL}")
+    print(f" - Total API calls planned: {total_seeds}")
     print(f" - Output file: {OUTPUT_JSONL}")
 
-    # Open file in append mode ('a') to allow resuming partially
     with open(OUTPUT_JSONL, 'a', encoding='utf-8') as outfile:
-        # Iterate through each seed topic with a progress bar
         for index, row in tqdm(df.iterrows(), total=total_seeds, desc="Processing Seeds"):
             country = row['CountryText']
             question = row['QuestionText']
             answer = row['AnswerText']
 
-            # Generate N dialogues for this seed
-            for i in range(DIALOGUES_PER_SEED):
-                user_prompt = f"""Generate a dialogue based on the following cultural context:
+            user_prompt = f"""Generate {DIALOGUES_PER_API_CALL} different dialogues based on the following cultural context. Ensure diversity between the dialogues as instructed.
 
 Country: {country}
 Survey Topic: {question}
 Common Tendency: {answer}
 
-Remember to follow all instructions and output ONLY the JSON object."""
+Output ONLY the JSON object containing the list of dialogues."""
 
-                messages = [
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": user_prompt}
-                ]
+            messages = [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt}
+            ]
 
-                try:
-                    # Make the API call
-                    completion = client.chat.completions.create(
-                        model=MODEL_NAME,
-                        messages=messages,
-                        temperature=0.7, # Adjust temperature for creativity vs consistency
-                        # max_tokens=500 # Optional: Set max tokens if needed
-                    )
+            current_temp = BASE_TEMPERATURE
+            if RANDOMIZE_TEMP:
+                 current_temp = max(0.1, min(1.0, BASE_TEMPERATURE + random.uniform(-0.1, 0.1)))
 
-                    response_content = completion.choices[0].message.content
-                    print("DEBUG: Raw API response content:", response_content) 
 
-                    # Validate the response
-                    validated_data = validate_dialogue_json(response_content)
+            try:
+                completion = client.chat.completions.create(
+                    model=MODEL_NAME,
+                    messages=messages,
+                    temperature=current_temp,
+                    # response_format={ "type": "json_object" }, # Use if API supports strict JSON mode
+                    # max_tokens=2048 # Increase if needed, watch out for limits
+                )
+                response_content = completion.choices[0].message.content
 
-                    if validated_data:
-                        # Write the validated JSON object (as a string) to the file, followed by a newline
-                        # We dump the validated data to ensure consistent JSON formatting
-                        outfile.write(json.dumps(validated_data, ensure_ascii=False) + '\n')
-                        generated_count += 1
-                    else:
-                        print(f"\nWarning: Invalid JSON or structure received for seed {index}, attempt {i+1}. Skipping.")
-                        # print("------ Received Content Start ------")
-                        # print(response_content)
-                        # print("------ Received Content End --------")
-                        error_count += 1
+                # Validate the entire batch response
+                validated_dialogue_list = validate_batch_response(response_content, DIALOGUES_PER_API_CALL)
 
-                except Exception as e:
-                    print(f"\nError during API call or processing for seed {index}, attempt {i+1}: {e}")
-                    error_count += 1
-                    # Optional: Add more robust error handling (e.g., retry logic)
+                if validated_dialogue_list is not None: # Validation succeeded (even if list is empty or smaller than requested)
+                    print("DEBUG: validated_dialogue_list", validated_dialogue_list)
+                    if validated_dialogue_list: # Check if list is not empty
+                        for dialogue_obj in validated_dialogue_list:
+                            # Write each valid dialogue object as a line
+                            outfile.write(json.dumps(dialogue_obj, ensure_ascii=False) + '\n')
+                        total_dialogues_generated += len(validated_dialogue_list)
+                    # else: (Handle case where API returned valid structure but empty list if needed)
+                else:
+                    # Validation failed (bad JSON or structure)
+                    print(f"\nError: API call for seed {index} returned invalid batch structure. Discarding response.")
+                    validation_failures += 1
 
-                # Optional delay
-                if DELAY_BETWEEN_CALLS > 0:
-                    time.sleep(DELAY_BETWEEN_CALLS)
+            except Exception as e:
+                print(f"\nError during API call for seed {index}: {e}")
+                api_call_errors += 1
+
+            # Optional delay
+            if DELAY_BETWEEN_CALLS > 0:
+                time.sleep(DELAY_BETWEEN_CALLS)
 
     print("\n--- Generation Summary ---")
-    print(f"Successfully generated and wrote {generated_count} dialogues.")
-    print(f"Encountered {error_count} errors or invalid responses.")
+    print(f"Total API calls attempted: {total_seeds}")
+    print(f" - API call errors: {api_call_errors}")
+    print(f" - Responses with invalid structure: {validation_failures}")
+    print(f"Successfully generated and wrote {total_dialogues_generated} individual dialogues.")
     print(f"Output saved to {OUTPUT_JSONL}")
-
