@@ -11,7 +11,7 @@ API_KEY_FILE = "apikey.txt"
 BASE_URL = "https://api.deepseek.com" # IMPORTANT: Replace
 MODEL_NAME = "deepseek-chat" # IMPORTANT: Replace if needed
 INPUT_CSV = "1_data_preprocessing/dataset/culture_wvs/majority_answers_CHN_50pct_sum_5pct_close.csv"
-OUTPUT_JSONL = "generated_dialogues_batch_CHN.jsonl"
+OUTPUT_JSONL = "1_data_preprocessing/dataset/culture_wvs/generated_dialogues/generated_dialogues_batch_CHN.jsonl"
 # Number of DIFFERENT dialogues to request in EACH API call (per seed topic)
 DIALOGUES_PER_API_CALL = 5 # Adjust (e.g., 3, 5, 10) - balance diversity need vs token limits
 DELAY_BETWEEN_CALLS = 1 # Optional delay
@@ -216,6 +216,8 @@ Output ONLY the JSON object containing the list of dialogues."""
                         # max_tokens=2048 # Increase if needed, watch out for limits
                     )
                     response_content = completion.choices[0].message.content
+
+                    print("DEBUG: Raw API response content:", response_content)
 
                     # Validate the entire batch response
                     validated_dialogue_list = validate_batch_response(response_content, DIALOGUES_PER_API_CALL)
