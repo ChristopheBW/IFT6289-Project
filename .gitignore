@@ -1,4 +1,8 @@
 1_data_preprocessing/dataset/culture_wvs/WVS_Cross-National_Wave_7_csv_v6_0.csv
 apikey.txt
 venv
+.venv
 .DS_Store
+ollama_gguf
+2_fine_tuning/adapter
+2_fine_tuning/merged
