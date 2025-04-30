@@ -8,6 +8,9 @@ country_dict = {
     'IDN': 'Indonesia',
 }
 
+# The questions with 1-10 scale answers
+q_list_1_10 = [48, 49, 50, 90, 106, 107, 108, 109, 110, 112, 120, 158, 159, 160, 161, 162, 163, 164, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252]
+
 def get_top_mode_answers_from_question(df_question, threshold=0.05):
     """
     Get the top mode answers from a question df_question.
@@ -50,7 +53,7 @@ def get_top_mode_answers_from_question(df_question, threshold=0.05):
 if __name__ == '__main__':
     dataset_dir = '1_data_preprocessing/dataset/culture_wvs'
 
-    country_code = 'CHN' # Example country code
+    country_code = 'IDN' # Example country code
 
     # Construct file paths
     wvs_path = f'{dataset_dir}/{country_code}.csv'
@@ -97,58 +100,98 @@ if __name__ == '__main__':
 
         # Get the response data for the current question
         df_question_responses = wvs_df_questions[question_index]
-
-        # Calculate the top mode answer(s) and their proportions for this question
-        # Pass the closeness_threshold to the helper function
-        top_mode_answers, top_mode_answers_proportions = get_top_mode_answers_from_question(
-            df_question_responses, threshold=closeness_threshold
-        )
-
-        # Debug print for a specific question like Q4
-        # if question_index == 'Q4':
-        #      print(f"\nDebug for {question_index}:")
-        #      print(f"Top mode answers: {top_mode_answers}")
-        #      print(f"Proportions: {top_mode_answers_proportions}")
-
-        # Check if any top mode answers were found
-        if top_mode_answers:
-            # Calculate the combined proportion of ALL identified top mode answers
-            combined_proportion = sum(top_mode_answers_proportions)
-
-            # if question_index == 'Q4': # Debug print
-            #     print(f"Combined proportion for {question_index}: {combined_proportion}")
-
-            # Check if the COMBINED proportion meets the majority threshold
-            if combined_proportion >= majority_proportion:
-                # --- Look up Question Text (only need to do this once per question) ---
+        
+        # Extract the question number from question_index (e.g., 'Q48' -> 48)
+        question_number = int(question_index.replace('Q', ''))
+        
+        # Check if this question uses a 1-10 scale
+        if question_number in q_list_1_10:
+            # Convert to numeric values, with non-numeric as NaN
+            numeric_responses = pd.to_numeric(df_question_responses, errors='coerce')
+            
+            # Filter valid responses (between 1 and 10 inclusive)
+            valid_responses = numeric_responses[(numeric_responses >= 1) & (numeric_responses <= 10)]
+            
+            # Calculate percentage of valid responses
+            total_responses = len(numeric_responses)
+            valid_count = len(valid_responses)
+            valid_percentage = valid_count / total_responses if total_responses > 0 else 0
+            
+            # If non-standard responses are more than 30%, skip this question
+            if valid_percentage < 0.7:  # Less than 70% valid means more than 30% invalid
+                continue
+                
+            # Calculate the average of valid 1-10 responses
+            average_response = valid_responses.mean()
+            
+            if not pd.isna(average_response):
+                # Get the question text
                 question_text_row = question_idx_text_df[question_idx_text_df['QuestionIndex'] == question_index]
-                # Should always find one because we checked `available_question_indices`
-                question_text = question_text_row.iloc[0]['QuestionText']
+                if not question_text_row.empty:
+                    question_text = question_text_row.iloc[0]['QuestionText']
+                    
+                    # Format the average to 2 decimal places and include valid response percentage
+                    answer_text = f"Average: {average_response:.2f} (on a scale of 1-10, {valid_percentage:.1%} valid responses)"
+                    
+                    # Add to results
+                    results_data.append({
+                        'CountryText': country_name,
+                        'QuestionText': question_text,
+                        'AnswerText': answer_text
+                    })
+        else:
+            # For non 1-10 scale questions, use the original logic
+            # Calculate the top mode answer(s) and their proportions for this question
+            # Pass the closeness_threshold to the helper function
+            top_mode_answers, top_mode_answers_proportions = get_top_mode_answers_from_question(
+                df_question_responses, threshold=closeness_threshold
+            )
+            
+            # Debug print for a specific question like Q4
+            # if question_index == 'Q4':
+            #      print(f"\nDebug for {question_index}:")
+            #      print(f"Top mode answers: {top_mode_answers}")
+            #      print(f"Proportions: {top_mode_answers_proportions}")
 
-                # --- Iterate through EACH top mode answer found ---
-                for i in range(len(top_mode_answers)):
-                    current_answer_index = top_mode_answers[i]
-                    # current_answer_proportion = top_mode_answers_proportions[i] # Optional info
+            # Check if any top mode answers were found
+            if top_mode_answers:
+                # Calculate the combined proportion of ALL identified top mode answers
+                combined_proportion = sum(top_mode_answers_proportions)
 
-                    # --- Look up Answer Text for the current answer index ---
-                    answer_text_row = answer_idx_text_df[
-                        (answer_idx_text_df['QuestionIndex'] == question_index) &
-                        (answer_idx_text_df['AnswerIndex'] == current_answer_index)
-                    ]
+                # if question_index == 'Q4': # Debug print
+                #     print(f"Combined proportion for {question_index}: {combined_proportion}")
 
-                    # Check if we found a matching answer text
-                    if not answer_text_row.empty:
-                        current_answer_text = answer_text_row.iloc[0]['AnswerText']
+                # Check if the COMBINED proportion meets the majority threshold
+                if combined_proportion >= majority_proportion:
+                    # --- Look up Question Text (only need to do this once per question) ---
+                    question_text_row = question_idx_text_df[question_idx_text_df['QuestionIndex'] == question_index]
+                    # Should always find one because we checked `available_question_indices`
+                    question_text = question_text_row.iloc[0]['QuestionText']
 
-                        # Append a separate result row for this specific answer
-                        results_data.append({
-                            'CountryText': country_name,
-                            'QuestionText': question_text,
-                            'AnswerText': current_answer_text
-                            # Optionally add proportion: 'Proportion': current_answer_proportion
-                        })
-                    # else:
-                    #     print(f"Warning: Answer text not found for Q:{question_index} A:{current_answer_index}. Skipping.")
+                    # --- Iterate through EACH top mode answer found ---
+                    for i in range(len(top_mode_answers)):
+                        current_answer_index = top_mode_answers[i]
+                        # current_answer_proportion = top_mode_answers_proportions[i] # Optional info
+
+                        # --- Look up Answer Text for the current answer index ---
+                        answer_text_row = answer_idx_text_df[
+                            (answer_idx_text_df['QuestionIndex'] == question_index) &
+                            (answer_idx_text_df['AnswerIndex'] == current_answer_index)
+                        ]
+
+                        # Check if we found a matching answer text
+                        if not answer_text_row.empty:
+                            current_answer_text = answer_text_row.iloc[0]['AnswerText']
+
+                            # Append a separate result row for this specific answer
+                            results_data.append({
+                                'CountryText': country_name,
+                                'QuestionText': question_text,
+                                'AnswerText': current_answer_text
+                                # Optionally add proportion: 'Proportion': current_answer_proportion
+                            })
+                        # else:
+                        #     print(f"Warning: Answer text not found for Q:{question_index} A:{current_answer_index}. Skipping.")
 
     # --- Generate the CSV file ---
 

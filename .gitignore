@@ -4,5 +4,6 @@ venv
 .venv
 .DS_Store
 ollama_gguf
-2_fine_tuning/adapter
-2_fine_tuning/merged
+2_fine_tuning/merged_llama32_culture
+adapter
+wandb

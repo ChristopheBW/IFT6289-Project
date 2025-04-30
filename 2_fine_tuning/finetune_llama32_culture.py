@@ -1,5 +1,6 @@
 import torch
 import os
+import wandb  # Add wandb import
 from datasets import load_dataset
 from transformers import (
     AutoModelForCausalLM,
@@ -11,6 +12,7 @@ from transformers import (
 )
 from peft import LoraConfig, PeftModel, get_peft_model
 from trl import SFTTrainer
+from transformers.trainer_callback import EarlyStoppingCallback  # Add this import
 
 # --- Configuration (Based on finetuning_plan_llama32_chn) ---
 
@@ -18,10 +20,10 @@ from trl import SFTTrainer
 base_model_id = "meta-llama/Llama-3.2-3B-Instruct" # Confirmed model ID
 
 # 2. Dataset Path
-dataset_path = "1_data_preprocessing/dataset/culture_wvs/generated_dialogues/generated_dialogues_batch_CHN.jsonl" # Your generated JSONL file
+dataset_path = "1_data_preprocessing/dataset/culture_wvs"
 
 # 3. Output Directory for Adapters
-adapter_output_dir = "./adapter/llama3.2-chn-adapters"
+adapter_output_dir = "./adapter/llama3.2-culture-adapters"
 
 # 4. BitsAndBytesConfig (Quantization for QLoRA)
 bnb_config = BitsAndBytesConfig(
@@ -64,19 +66,22 @@ training_args = TrainingArguments(
     weight_decay=0.01,                  # As per plan
     logging_steps=10,                   # Log training loss frequently
     save_strategy="epoch",              # Save adapter checkpoints every epoch
-    #evaluation_strategy="epoch",        # Evaluate on validation set every epoch
+    eval_strategy="epoch",        # Uncommented: Evaluate on validation set every epoch
     fp16=False,                         # Set fp16=True if bf16=False and CUDA supports fp16 well
     bf16=True,                          # Use bf16 if supported (Ampere GPUs like 3090 support it)
     max_grad_norm=0.3,                  # Helps prevent exploding gradients
     group_by_length=True,               # Group sequences of similar length for efficiency
-    report_to="tensorboard",            # Or "wandb" if you prefer
-    # load_best_model_at_end=True,      # Optional: Reload best checkpoint based on eval loss
-    # metric_for_best_model="loss",     # Optional: Metric to determine best model
+    report_to="wandb",                  # Changed from "tensorboard" to "wandb"
+    load_best_model_at_end=True,        # Uncommented: Reload best checkpoint based on eval loss
+    metric_for_best_model="loss",       # Uncommented: Metric to determine best model
 )
 
 # --- Script Execution ---
 
 def main():
+    # Initialize wandb before training
+    wandb.init(project="llama-3.2-culture-finetune", name="llama-3.2-culture-lora")
+    
     # 1. Load Tokenizer and Model
     print("Loading tokenizer...")
     # Ensure you have access or are logged in if model is gated
@@ -105,26 +110,19 @@ def main():
     # model.print_trainable_parameters()
 
     # 2. Load and Prepare Dataset
-    print("Loading dataset...")
-    dataset = load_dataset("json", data_files=dataset_path, split="train")
-    print(f"Dataset loaded with {len(dataset)} samples.")
+    print("Loading pre-split datasets...")
+    train_dataset = load_dataset("json", data_files="1_data_preprocessing/dataset/culture_wvs/train_dialogues.jsonl", split="train")
+    eval_dataset = load_dataset("json", data_files="1_data_preprocessing/dataset/culture_wvs/val_dialogues.jsonl", split="train")
+    print(f"Training samples: {len(train_dataset)}, Validation samples: {len(eval_dataset)}")
 
     # Optional: Inspect first sample structure
-    print("First sample structure:")
-    print(dataset[0])
-
-    # Split dataset
-    print("Splitting dataset...")
-    dataset_dict = dataset.train_test_split(test_size=0.05) # 5% validation
-    train_dataset = dataset_dict["train"]
-    eval_dataset = dataset_dict["test"]
-    print(f"Training samples: {len(train_dataset)}, Validation samples: {len(eval_dataset)}")
+    print("First training sample structure:")
+    print(train_dataset[0])
 
     # 3. Initialize SFTTrainer
     print("Initializing SFTTrainer...")
     trainer = SFTTrainer(
         model=model,                        # Base model (PEFT applied internally by trainer)
-        #tokenizer=tokenizer,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
@@ -139,6 +137,14 @@ def main():
         #     "add_special_tokens": False,    # We handle special tokens via chat template usually
         #     "append_concat_token": False,   # No need for this with chat format
         # }
+    )
+    
+    # Add EarlyStoppingCallback
+    trainer.add_callback(
+        EarlyStoppingCallback(
+            early_stopping_patience=2,      # Stop after 3 epochs with no improvement
+            early_stopping_threshold=0.01,  # Minimum improvement to count (optional)
+        )
     )
 
     # 4. Start Training
@@ -160,6 +166,9 @@ def main():
     del trainer
     torch.cuda.empty_cache()
 
+    # Close wandb run at the end
+    wandb.finish()
+    
     print("--- Fine-tuning Complete ---")
     print(f"Adapters saved to: {adapter_output_dir}")
     print("To use the model, load the base model and apply these adapters.")

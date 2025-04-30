@@ -5,8 +5,8 @@ import os
 
 # --- Configuration ---
 base_model_id = "meta-llama/Llama-3.2-3B-Instruct"
-adapter_path = "2_fine_tuning/adapter/llama3.2-empathy-adapters" # Path to your trained adapters
-merged_model_path = "2_fine_tuning/merged_llama32_empathy" # Directory to save the merged model
+adapter_path = "adapter/llama3.2-culture-adapters" # Path to your trained adapters
+merged_model_path = "2_fine_tuning/merged_llama32_culture" # Directory to save the merged model
 
 # --- Load Base Model ---
 print(f"Loading base model: {base_model_id}")
