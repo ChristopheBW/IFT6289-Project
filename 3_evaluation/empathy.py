@@ -20,7 +20,7 @@ def download_nltk_resources():
 # Call this function at the beginning
 download_nltk_resources()
 
-OLLAMA_URL = "http://107.171.241.118:11454/api/chat"
+OLLAMA_URL = "https://ollama.christophebw.net/api/chat"
 TEST_FILE = "1_data_preprocessing/dataset/empatheticdialogues/test.jsonl"
 MODELS = ["llama3.2", "llama3.2-empathy"]
 MAX_RETRIES = 3
