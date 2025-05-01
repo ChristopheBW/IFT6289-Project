@@ -2,7 +2,7 @@
 
 ## Model GGUF
 
-We uploaded the fine-tuned model to huggingface in gguf file, you can deploy them and evaluate directly without wasting time, electricity and money for API requests.
+We uploaded the fine-tuned model and generated dialogues dataset to huggingface in gguf file, you can deploy them and evaluate directly without wasting time, electricity and money for API requests.
 
 https://huggingface.co/ChristopheBW/IFT6289
 
