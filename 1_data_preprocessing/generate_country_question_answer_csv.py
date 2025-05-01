@@ -14,21 +14,19 @@ q_list_1_10 = [48, 49, 50, 90, 106, 107, 108, 109, 110, 112, 120, 158, 159, 160,
 def get_top_mode_answers_from_question(df_question, threshold=0.05):
     """
     Get the top mode answers from a question df_question.
-    :param df_question: the question df, shape should be(n,) where n is the number of rows
-    :param threshold: the proportional difference between these answers should be smaller than the threshold.
-    :return: a dict with the top mode answers and their proportions: (list of top mode answers, list of their proportions respectively)
+    
+    Args:
+        df_question: The question dataframe, shape should be(n,) where n is the number of rows
+        threshold: The proportional difference between answers should be smaller than the threshold
+        
+    Returns:
+        Tuple containing (list of top mode answers, list of their proportions)
     """
-    # get the value counts of the question
     value_counts = df_question.value_counts()
-    
-    # calculate the proportion of each answer
     proportions = value_counts / len(df_question)
-    #print(proportions)
     
-    # get the highest proportion (first value)
     max_proportion = proportions.iloc[0]
     
-    # find answers where the proportion difference to the highest proportion is smaller than the threshold
     top_mode_answers = []
     top_mode_answers_proportions = []
     
@@ -42,26 +40,22 @@ def get_top_mode_answers_from_question(df_question, threshold=0.05):
     result_top_mode_answers = []
     result_top_mode_answers_proportions = []
 
-    # convert from numpy array to list
     for i in range(len(top_mode_answers)):
         result_top_mode_answers.append(top_mode_answers[i].tolist())
         result_top_mode_answers_proportions.append(top_mode_answers_proportions[i].tolist())
 
-    # return the top mode answers and their proportions
     return result_top_mode_answers, result_top_mode_answers_proportions
 
 if __name__ == '__main__':
     dataset_dir = '1_data_preprocessing/dataset/culture_wvs'
 
-    country_code = 'IDN' # Example country code
+    country_code = 'IDN'
 
-    # Construct file paths
     wvs_path = f'{dataset_dir}/{country_code}.csv'
     answer_idx_text_path = f"{dataset_dir}/manual_labeled/wvs_a_idx_text.csv"
     question_idx_text_path = f"{dataset_dir}/manual_labeled/wvs_q_idx_text.csv"
 
     try:
-        # read the CSV files
         wvs_df = pd.read_csv(wvs_path, low_memory=False)
         answer_idx_text_df = pd.read_csv(answer_idx_text_path, low_memory=False)
         question_idx_text_df = pd.read_csv(question_idx_text_path, low_memory=False)
@@ -70,145 +64,90 @@ if __name__ == '__main__':
         exit()
 
 
-    # Filter columns starting with 'Q' followed by digits
     wvs_df_questions = wvs_df.filter(regex="^Q\d+")
     wvs_question_list = wvs_df_questions.columns.to_list()
-    # --- User Defined Parameters ---
-    # This proportion now applies to the SUM of the top mode answers identified by the helper function
+    
+    # User Defined Parameters
     majority_proportion = 0.5
-    # This threshold is used within the helper function to group answers with close proportions
-    closeness_threshold = 0.05 # Example: Answers within 5% of the top proportion are grouped
-    # ---
+    closeness_threshold = 0.05
+    
+    results_data = []
 
-    results_data = [] # List to store results for the final DataFrame
+    country_name = country_dict.get(country_code, country_code)
 
-    # Get the full country name from the dictionary
-    country_name = country_dict.get(country_code, country_code) # Use code as fallback
-
-    # --- Logic Implementation Start ---
-
-    # Create sets for faster lookup of available question indices
     available_question_indices = set(question_idx_text_df['QuestionIndex'])
 
-    # Iterate through each question column identified in the country's WVS data
     for question_index in wvs_question_list:
 
-        # Check if this question index exists in our question text mapping file
         if question_index not in available_question_indices:
-            # print(f"Skipping {question_index}: Not found in question_idx_text_df.")
-            continue # Skip this question if its text definition isn't available
+            continue
 
-        # Get the response data for the current question
         df_question_responses = wvs_df_questions[question_index]
         
-        # Extract the question number from question_index (e.g., 'Q48' -> 48)
         question_number = int(question_index.replace('Q', ''))
         
-        # Check if this question uses a 1-10 scale
         if question_number in q_list_1_10:
-            # Convert to numeric values, with non-numeric as NaN
             numeric_responses = pd.to_numeric(df_question_responses, errors='coerce')
             
-            # Filter valid responses (between 1 and 10 inclusive)
             valid_responses = numeric_responses[(numeric_responses >= 1) & (numeric_responses <= 10)]
             
-            # Calculate percentage of valid responses
             total_responses = len(numeric_responses)
             valid_count = len(valid_responses)
             valid_percentage = valid_count / total_responses if total_responses > 0 else 0
             
-            # If non-standard responses are more than 30%, skip this question
-            if valid_percentage < 0.7:  # Less than 70% valid means more than 30% invalid
+            if valid_percentage < 0.7:
                 continue
                 
-            # Calculate the average of valid 1-10 responses
             average_response = valid_responses.mean()
             
             if not pd.isna(average_response):
-                # Get the question text
                 question_text_row = question_idx_text_df[question_idx_text_df['QuestionIndex'] == question_index]
                 if not question_text_row.empty:
                     question_text = question_text_row.iloc[0]['QuestionText']
                     
-                    # Format the average to 2 decimal places and include valid response percentage
                     answer_text = f"Average: {average_response:.2f} (on a scale of 1-10, {valid_percentage:.1%} valid responses)"
                     
-                    # Add to results
                     results_data.append({
                         'CountryText': country_name,
                         'QuestionText': question_text,
                         'AnswerText': answer_text
                     })
         else:
-            # For non 1-10 scale questions, use the original logic
-            # Calculate the top mode answer(s) and their proportions for this question
-            # Pass the closeness_threshold to the helper function
             top_mode_answers, top_mode_answers_proportions = get_top_mode_answers_from_question(
                 df_question_responses, threshold=closeness_threshold
             )
             
-            # Debug print for a specific question like Q4
-            # if question_index == 'Q4':
-            #      print(f"\nDebug for {question_index}:")
-            #      print(f"Top mode answers: {top_mode_answers}")
-            #      print(f"Proportions: {top_mode_answers_proportions}")
-
-            # Check if any top mode answers were found
             if top_mode_answers:
-                # Calculate the combined proportion of ALL identified top mode answers
                 combined_proportion = sum(top_mode_answers_proportions)
 
-                # if question_index == 'Q4': # Debug print
-                #     print(f"Combined proportion for {question_index}: {combined_proportion}")
-
-                # Check if the COMBINED proportion meets the majority threshold
                 if combined_proportion >= majority_proportion:
-                    # --- Look up Question Text (only need to do this once per question) ---
                     question_text_row = question_idx_text_df[question_idx_text_df['QuestionIndex'] == question_index]
-                    # Should always find one because we checked `available_question_indices`
                     question_text = question_text_row.iloc[0]['QuestionText']
 
-                    # --- Iterate through EACH top mode answer found ---
                     for i in range(len(top_mode_answers)):
                         current_answer_index = top_mode_answers[i]
-                        # current_answer_proportion = top_mode_answers_proportions[i] # Optional info
 
-                        # --- Look up Answer Text for the current answer index ---
                         answer_text_row = answer_idx_text_df[
                             (answer_idx_text_df['QuestionIndex'] == question_index) &
                             (answer_idx_text_df['AnswerIndex'] == current_answer_index)
                         ]
 
-                        # Check if we found a matching answer text
                         if not answer_text_row.empty:
                             current_answer_text = answer_text_row.iloc[0]['AnswerText']
 
-                            # Append a separate result row for this specific answer
                             results_data.append({
                                 'CountryText': country_name,
                                 'QuestionText': question_text,
                                 'AnswerText': current_answer_text
-                                # Optionally add proportion: 'Proportion': current_answer_proportion
                             })
-                        # else:
-                        #     print(f"Warning: Answer text not found for Q:{question_index} A:{current_answer_index}. Skipping.")
 
-    # --- Generate the CSV file ---
-
-    # Convert the collected results into a Pandas DataFrame
     results_df = pd.DataFrame(results_data)
 
-    # Define the output file path
-    # Added closeness threshold to filename for clarity
     output_csv_path = f'{dataset_dir}/majority_answers_{country_code}_{int(majority_proportion*100)}pct_sum_{int(closeness_threshold*100)}pct_close.csv'
 
-    # Check if any results were found before saving
     if not results_df.empty:
-        # Save the DataFrame to a CSV file
-        # Ensure the columns are in the desired order and exclude the DataFrame index
         results_df.to_csv(output_csv_path, index=False, columns=['CountryText', 'QuestionText', 'AnswerText'])
         print(f"Successfully generated CSV file: {output_csv_path}")
         print(f"Number of majority opinion rows found: {len(results_df)}")
     else:
-        # Inform the user if no questions met the criteria
         print(f"No questions found for {country_name} where the sum of top mode answers (within {closeness_threshold*100}% proportion of max) was >= {majority_proportion*100}%.")

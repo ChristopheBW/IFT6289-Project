@@ -2,7 +2,6 @@ import csv
 import os
 import re
 
-# Templates for different question groups stored in a dictionary
 q_major_templates = {
     "1_10": "This question is about job preferences. Please think of an ideal job, disregarding your present job, if you have one. In choosing an ideal job, how important would it be to you to {question_text}. Answer with only a number where: 1 = of utmost importance, 2 = very important, 3 = of moderate importance, 4 = of little importance, 5 = of very little or no importance",
     "11_14": "In your private life, how important is {question_text} to you: Answer with only a number where: 1 = of utmost importance, 2 = very important, 3 = of moderate importance, 4 = of little importance, 5 = of very little or no importance",
@@ -15,23 +14,18 @@ q_major_templates = {
     "21_24": "To what extent do you agree or disagree with: {question_text}? Answer with only a number where: 1 = strongly agree, 2 = agree, 3 = undecided, 4 = disagree, 5 = strongly disagree"
 }
 
-# Current directory where the script is running
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Input and output file paths
 input_file = os.path.join(current_dir, 'vsm_q_text.csv')
 output_file = os.path.join(current_dir, 'formatted_vsm_questions.csv')
 
-# Read input CSV file and format questions
 formatted_questions = []
 with open(input_file, 'r') as infile:
     reader = csv.DictReader(infile)
     for row in reader:
         id_num = int(row['id'])
         
-        # Find the appropriate template for this question ID
         for id_range, template in q_major_templates.items():
-            # Match either a range like "1_10" or a single number like "17"
             range_match = re.match(r"(\d+)_(\d+)", id_range)
             single_match = re.match(r"^(\d+)$", id_range)
             
@@ -44,11 +38,9 @@ with open(input_file, 'r') as infile:
             elif single_match:
                 single_id = int(single_match.group(1))
                 if id_num == single_id:
-                    # For question 17 and other single IDs, we use the template directly
                     formatted_questions.append({'id': id_num, 'question': template})
                     break
 
-# Write formatted questions to output CSV file
 with open(output_file, 'w', newline='') as outfile:
     fieldnames = ['id', 'question']
     writer = csv.DictWriter(outfile, fieldnames=fieldnames)

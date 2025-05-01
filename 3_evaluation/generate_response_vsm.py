@@ -11,7 +11,7 @@ OLLAMA_API_URL = "https://ollama.christophebw.net/api/generate"
 # Models to use
 MODELS = ["llama3.2", "llama3.2-culture"]
 
-# Map cultures to country codes
+# Culture to country code mapping
 CULTURES = {
     "Canada": "CAN",
     "Chinese": "CHN",
@@ -42,7 +42,7 @@ def generate_response(model: str, system_prompt: str, question: str, temperature
         "temperature": temperature
     }
     
-    # Add seed to payload if provided (note: may be ignored by older Ollama versions)
+    # Add seed if provided
     if seed is not None:
         payload["seed"] = seed
     

@@ -7,7 +7,7 @@ import os
 # File paths
 TEST_FILE = "1_data_preprocessing/dataset/empatheticdialogues/test.jsonl"
 RESPONSE_FILES = {
-    "llama3.2": "3_evaluation/responses_llama3.2.csv",  # Fixed typo: 3_valuation -> 3_evaluation
+    "llama3.2": "3_evaluation/responses_llama3.2.csv",
     "llama3.2-empathy": "3_evaluation/responses_llama3.2-empathy.csv"
 }
 

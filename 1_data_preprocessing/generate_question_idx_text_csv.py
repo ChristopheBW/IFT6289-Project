@@ -13,8 +13,7 @@ os.makedirs(os.path.dirname(csv_file_path), exist_ok=True)
 with open(md_file_path, 'r', encoding='utf-8') as md_file:
     md_content = md_file.read()
 
-# Extract question indices and text using regex
-# Modified pattern to only capture the text on the same line as the question identifier
+# Pattern captures question ID and text on the same line
 pattern = r'\*\*(Q\d+)-\*\*\s+(.*?)(?=\n)'
 matches = re.findall(pattern, md_content, re.MULTILINE)
 
